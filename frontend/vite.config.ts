@@ -25,6 +25,11 @@ export default defineConfig(({ mode }) => {
       host: '0.0.0.0',
       port: devPort,
       strictPort: true,
+      // Coolify's Traefik proxy forwards the public hostname
+      // (accops.ps-xingmu.asia); Vite 7 blocks any Host outside
+      // allowedHosts, so accept all hosts here. The panel is a
+      // single-user admin UI behind Cloudflare + its own login.
+      allowedHosts: true,
       proxy: {
         '/api': {
           target: proxyTarget,
